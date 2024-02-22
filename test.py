@@ -8,7 +8,7 @@ import sys
 sys.path.append(FREECADPATH)
 sys.path.append("/")
 
-def renderdxf():
+def renderdxf(path, name):
     try:
         import FreeCAD
         import importDXF
@@ -17,33 +17,51 @@ def renderdxf():
     except ValueError:
         print('FreeCAD library not found. Please check the FREECADPATH variable in the import script is correct')
         exit()
-    print('FreeCAD library found')
-    path = "/tmp/mirte-frame/wedge.FCStd"
-    doc = FreeCAD.open(path)
-    print('File opened')
-    print(doc.__dict__)
-    sv0 = Draft.make_shape2dview(FreeCAD.getDocument("wedge").Sketch, FreeCAD.Vector(0,-1,0))
-    FreeCAD.getDocument("wedge").recompute()
+    # print('FreeCAD library found')
+    filepath = path+name+".FCStd"
+    doc = FreeCAD.open(filepath)
+    # print('File opened')
+    # print(doc.__dict__)
+    sv0 = Draft.make_shape2dview(FreeCAD.getDocument(name).Sketch, FreeCAD.Vector(0,-1,0))
+    FreeCAD.getDocument(name).recompute()
     # replace fcstd with dxf
-    pathOut = path.replace(".FCStd", ".dxf")
+    pathOut = filepath.replace(".FCStd", ".dxf")
     __objs__ = []
-    __objs__.append(FreeCAD.getDocument("wedge").getObject("Shape2DView"))
+    __objs__.append(FreeCAD.getDocument(name).getObject("Shape2DView"))
 
     # exit()
     if hasattr(importDXF, "exportOptions"):
-        print('exportOptions')
+        # print('exportOptions')
         options = importDXF.exportOptions(pathOut)
         importDXF.export(__objs__, pathOut, options)
     else:
-        print('exportOptions2')
+        # print('exportOptions2')
         d = importDXF.export(__objs__, pathOut)
-        print(d)
+        # print(d)
 
     del __objs__
-    exit()
+    FreeCAD.closeDocument(name)
 
 # def main():
-renderdxf() 
+# renderdxf("/mirte-frame/", "layer") 
+# renderdxf("/mirte-frame/", "wedge") 
+import os
+# assign directory
+directory = '/tmp/mirte-frame/'
+ 
+# iterate over files in
+# that directory
+for filename in os.listdir(directory):
+    f = os.path.join(directory, filename)
+    # checking if it is a file
+    if os.path.isfile(f):
+        print(f)
+        if f.endswith(".FCStd"):
+            print(f)
+            name = f.split("/")[-1].split(".")[0]
+            print(name)
+            renderdxf(directory, name)
+
 # This lets you import the script without running it
 # if __name__=='__main__':
 # main()
