@@ -1,0 +1,30 @@
+name: DXF Export
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: install freecad
+        run: |
+          sudo add-apt-repository ppa:freecad-maintainers/freecad-stable -y
+          sudo apt-get update
+          sudo apt-get install freecad -y
+    
+      - name: Run FreeCAD
+        run: |
+            echo "exec(open(\"/mirte-frame/test.py\").read())" | freecadcmd
+      - name: Upload DXF
+        uses: actions/upload-artifact@v2
+        with:
+          name: dxf
+          path: /mirte-frame/wedge.dxf
+
