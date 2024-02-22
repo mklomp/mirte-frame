@@ -19,7 +19,9 @@ jobs:
     
       - name: Run FreeCAD
         run: |
-            echo "exec(open(\"/mirte-frame/test.py\").read())" | freecadcmd
+            mkdir /mirte-frame
+            cp ./ /mirte-frame
+            echo "exec(open(\"$(pwd)/test.py\").read())" | freecadcmd
       - name: Upload DXF
         uses: actions/upload-artifact@v4
         with:
