@@ -1,9 +1,7 @@
 name: DXF Export
 
 on:
-  push:
-    branches:
-      - main
+  [push]
 
 jobs:
   build:
@@ -23,7 +21,7 @@ jobs:
         run: |
             echo "exec(open(\"/mirte-frame/test.py\").read())" | freecadcmd
       - name: Upload DXF
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: dxf
           path: /mirte-frame/wedge.dxf
