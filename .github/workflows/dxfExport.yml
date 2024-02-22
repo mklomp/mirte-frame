@@ -19,12 +19,12 @@ jobs:
     
       - name: Run FreeCAD
         run: |
-            mkdir /mirte-frame
-            cp ./ /mirte-frame
-            echo "exec(open(\"$(pwd)/test.py\").read())" | freecadcmd
+            mkdir /tmp/mirte-frame
+            cp ./ /tmp/mirte-frame
+            echo "exec(open(\"/tmp/mirte-frame/test.py\").read())" | freecadcmd
       - name: Upload DXF
         uses: actions/upload-artifact@v4
         with:
           name: dxf
-          path: /mirte-frame/wedge.dxf
+          path: /tmp/mirte-frame/wedge.dxf
 

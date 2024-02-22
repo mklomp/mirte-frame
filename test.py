@@ -18,7 +18,7 @@ def renderdxf():
         print('FreeCAD library not found. Please check the FREECADPATH variable in the import script is correct')
         exit()
     print('FreeCAD library found')
-    path = "/mirte-frame/wedge.FCStd"
+    path = "/tmp/mirte-frame/wedge.FCStd"
     doc = FreeCAD.open(path)
     print('File opened')
     print(doc.__dict__)
