@@ -37,7 +37,7 @@ def renderbody(path, name, body, doc, filepath):
     # replace fcstd with dxf
     pathOut = filepath.replace(".FCStd", f"_{body.Label}.dxf")
     __objs__ = []
-    __objs__.append(FreeCAD.getDocument(name).getObject("Shape2DView"))
+    __objs__.append(FreeCAD.getDocument(name).getObject(sv0.Name))
 
     # exit()
     if hasattr(importDXF, "exportOptions"):
@@ -50,6 +50,7 @@ def renderbody(path, name, body, doc, filepath):
         # print(d)
 
     del __objs__
+    # FreeCAD.getDocument(name).getObject("Shape2DView").removeObject()
 
 # def main():
 # renderdxf("/mirte-frame/", "layer") 
