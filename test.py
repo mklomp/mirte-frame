@@ -23,7 +23,8 @@ def renderdxf(path, name):
     doc = FreeCAD.open(filepath)
     bodies = list()
     for obj in doc.Objects:
-        if obj.isDerivedFrom("PartDesign::Body"):
+        # Fix for motor clamp lock, the chamfer one is the final one
+        if obj.isDerivedFrom("PartDesign::Body") or obj.isDerivedFrom("Part::Chamfer"):
                 bodies.append(obj)
     print(bodies)
     for body in bodies:
