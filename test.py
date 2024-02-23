@@ -11,6 +11,7 @@ try:
     import FreeCAD
     import importDXF
     import Draft
+    import Mesh
     # from FreeCAD import importDXF
 except ValueError:
     print('FreeCAD library not found. Please check the FREECADPATH variable in the import script is correct')
@@ -27,6 +28,7 @@ def renderdxf(path, name):
     print(bodies)
     for body in bodies:
         renderbody(path, name, body, doc, filepath)
+        renderstl(path, name, body, doc, filepath)
     FreeCAD.closeDocument(name)
 
     # print('File opened')
@@ -52,6 +54,20 @@ def renderbody(path, name, body, doc, filepath):
     del __objs__
     # FreeCAD.getDocument(name).getObject("Shape2DView").removeObject()
 
+def renderstl(path, name, body, doc, filepath):
+    __objs__ = []
+    __objs__.append(body)
+    pathOut = filepath.replace(".FCStd", f"_{body.Label}.stl")
+
+    if hasattr(Mesh, "exportOptions"):
+        options = Mesh.exportOptions(pathOut)
+        Mesh.export(__objs__, pathOut, options)
+    else:
+        Mesh.export(__objs__, pathOut)
+	
+    del __objs__
+
+
 # def main():
 # renderdxf("/mirte-frame/", "layer") 
 # renderdxf("/mirte-frame/", "wedge") 
@@ -62,7 +78,7 @@ if docker:
     directory = '/mirte-frame/'
 # iterate over files in
 # that directory
-if True:
+if not docker:
     for filename in os.listdir(directory):
         f = os.path.join(directory, filename)
         # checking if it is a file

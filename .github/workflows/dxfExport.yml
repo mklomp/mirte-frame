@@ -28,4 +28,9 @@ jobs:
         with:
           name: dxfs
           path: /tmp/mirte-frame/*.dxf
+      - name: Upload STL
+        uses: actions/upload-artifact@v4
+        with:
+          name: stls
+          path: /tmp/mirte-frame/*.stl
 
