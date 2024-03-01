@@ -1,6 +1,4 @@
 #!/usr/local/bin/FreeCADCmd
-print("test")
-docker=False
 FREECADPATH = '/usr/lib/freecad-python3/lib/' # path to your FreeCAD.so or FreeCAD.pyd file,
 # for Windows you must either use \\ or / in the path, using a single \ is problematic
 # FREECADPATH = 'C:\\FreeCAD\\bin'
@@ -75,23 +73,15 @@ def renderstl(path, name, body, doc, filepath):
 import os
 # assign directory
 directory = '/tmp/mirte-frame/'
-if docker:
-    directory = '/mirte-frame/'
 # iterate over files in
 # that directory
-if not docker:
-    for filename in os.listdir(directory):
-        f = os.path.join(directory, filename)
-        # checking if it is a file
-        if os.path.isfile(f):
+for filename in os.listdir(directory):
+    f = os.path.join(directory, filename)
+    # checking if it is a file
+    if os.path.isfile(f):
+        print(f)
+        if f.endswith(".FCStd"):
             print(f)
-            if f.endswith(".FCStd"):
-                print(f)
-                name = f.split("/")[-1].split(".")[0]
-                print(name)
-                renderdxf(directory, name)
-else:
-    renderdxf(directory, "attachments")
-# This lets you import the script without running it
-# if __name__=='__main__':
-# main()
+            name = f.split("/")[-1].split(".")[0]
+            print(name)
+            renderdxf(directory, name)

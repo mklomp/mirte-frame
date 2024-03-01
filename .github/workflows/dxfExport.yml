@@ -21,8 +21,8 @@ jobs:
         run: |
             mkdir /tmp/mirte-frame
             cp -r ./freecadFiles/* /tmp/mirte-frame
-            cp -r ./test.py /tmp/mirte-frame
-            echo "exec(open(\"/tmp/mirte-frame/test.py\").read())" | freecadcmd
+            cp -r ./scripts/generate.py /tmp/mirte-frame
+            echo "exec(open(\"/tmp/mirte-frame/generate.py\").read())" | freecadcmd
       - name: Upload DXF
         uses: actions/upload-artifact@v4
         with:
@@ -33,4 +33,5 @@ jobs:
         with:
           name: stls
           path: /tmp/mirte-frame/*.stl
+      
 
