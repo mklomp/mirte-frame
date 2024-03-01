@@ -33,5 +33,17 @@ jobs:
         with:
           name: stls
           path: /tmp/mirte-frame/*.stl
-      
+      - name: zip files
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          cd /tmp/mirte-frame
+          zip -r /tmp/mirte-frame-stl.zip ./*.stl
+          zip -r /tmp/mirte-frame-dxf.zip ./*.dxf
+      - name: Push to release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+            files: 
+              /tmp/mirte-frame-dxf.zip
+              /tmp/mirte-frame-stl.zip
 
