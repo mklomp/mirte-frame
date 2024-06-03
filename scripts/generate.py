@@ -104,7 +104,10 @@ def renderFile(freecadFile):
 import os
 import shutil
 from pathlib import Path
-dir_path = Path(__File__).resolve().parent
+
+dir_path = "./"
+if '__file__' in globals():
+   dir_path = Path(__File__).resolve().parent
 freecad_directory = (dir_path / rel_freecad_directory).resolve()
 
 # clean build directory
