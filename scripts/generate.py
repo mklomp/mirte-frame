@@ -106,12 +106,17 @@ import shutil
 from pathlib import Path
 
 dir_path = Path(os.getcwd())
+print(dir_path)
+print(os.listdir(dir_path))
 freecad_directory = (dir_path / rel_freecad_directory).resolve()
+print(freecad_path)
+print(os.listdir(freecad_path))
 
 # clean build directory
 if (freecad_directory.parent / "build").exists():
     shutil.rmtree(freecad_directory.parent / "build")
-  
+
+print(os.listdir(freecad_path))
 # render all freecad files
 for filename in os.listdir(freecad_directory):
     f = freecad_directory / filename
