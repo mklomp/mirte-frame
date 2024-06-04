@@ -23,7 +23,7 @@ jobs:
             cp -r ./freecadFiles /tmp/mirte-frame
             cp -r ./scripts /tmp/mirte-frame
             cp ./bill_of_materials.md /tmp/mirte-frame
-            cd scripts
+            cd /tmp/mirte-frame/scripts
             echo "exec(open(\"/tmp/mirte-frame/scripts/generate.py\").read())" | freecadcmd
       - name: Upload DXF
         uses: actions/upload-artifact@v4
