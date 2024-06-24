@@ -5,12 +5,11 @@ import importlib
 importlib.reload(gen)
 
 #TODO: 
-# - alle onderdelen goede plaats
-# - add time sleep om zwtart et vorkomen
-# - do we need the orth fix?
-# - closeDocument in assembly (met vraag of export)
-# - frame houten kleur
-# - gele motoren
+# - alle onderdelen goede plaats (eerste Dante step export goed)
+# - L.add time sleep om zwtart et vorkomen
+# - L.do we need the orth fix?
+# - L.closeDocument in assembly (met vraag of export)
+# - L.frame houten kleur
 
 # - met breadboard
 # - mirte light & basic
@@ -167,12 +166,12 @@ if mirte == "pioneer":
   #mirte_assembly.addStep(gen.ParallelSequence([gen.Sequence([gen.Step(spacer1, App.Vector(0,50,0))]), gen.Sequence([gen.Step(spacer2, App.Vector(0,50,0)) ]), gen.Sequence([gen.Step(spacer3, App.Vector(0,50,0)) ]), gen.Sequence([gen.Step(spacer4, App.Vector(0,50,0)) ])]))
   #mirte_assembly.save_image_new_parts()
 
-####### STEP 15 ####
-#motor_left = mirte_assembly.import_object("external", "yellow_toy_motor_dims.step", App.Vector(11.5, 4.5, 37.5), App.Rotation(90,0,0))
-#motor_right = mirte_assembly.import_object("external", "yellow_toy_motor_dims.step", App.Vector(11.5, 4.5, -37.5), App.Rotation(90,0,0))
-#mirte_assembly.addStep(gen.ParallelSequence([gen.Sequence([gen.Step(motor_left, App.Vector(0,0,0), App.Vector(0,1,0), -30), gen.Step(motor_left, App.Vector(0,0,50))]), gen.Sequence([gen.Step(motor_right, App.Vector(0,0,0), App.Vector(0,1,0), 30), gen.Step(motor_right, App.Vector(0,0,-50))])]))
-#mirte_assembly.save_image_new_parts()
-#
+###### STEP 15 ####
+motor_left = mirte_assembly.import_object("external", "GearedMotor 3-6V.step", App.Vector(11.5, 4.5, 37.5), App.Rotation(90,0,0))
+motor_right = mirte_assembly.import_object("external", "GearedMotor 3-6V.step", App.Vector(11.5, 4.5, -37.5), App.Rotation(90,0,0))
+mirte_assembly.addStep(gen.ParallelSequence([gen.Sequence([gen.Step(motor_left, App.Vector(0,0,0), App.Vector(0,1,0), -30), gen.Step(motor_left, App.Vector(0,0,50))]), gen.Sequence([gen.Step(motor_right, App.Vector(0,0,0), App.Vector(0,1,0), 30), gen.Step(motor_right, App.Vector(0,0,-50))])]))
+mirte_assembly.save_image_new_parts()
+
 ###### STEP 16 ####
 #wheel_left = mirte_assembly.import_object("external", "Wheel D65x25.STEP", App.Vector(11.5, 15.5, 77), App.Rotation(0,0,0))
 #wheel_right = mirte_assembly.import_object("external", "Wheel D65x25.STEP", App.Vector(11.5, 15.5, -77), App.Rotation(0,0,180))
