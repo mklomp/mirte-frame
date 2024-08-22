@@ -1,6 +1,7 @@
-This repositoay contains the frame for the MIRTE Light, Basic and Pioneer.
+This repository contains the frame for the MIRTE Light, Basic and Pioneer.
 The releases will include files for lasercutting (DXF), 3D printing (STL),
-and files to generate renders for workshops (STEP). 
+and files to generate renders for workshops (STEP). The current default
+thickness is 3mm.
 
 MIRTE Light & Basic needs:
 ==========================
